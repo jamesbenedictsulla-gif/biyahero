@@ -1,0 +1,6 @@
+[
+  {"stop_id": "S1", "name": "Butuan City Terminal", "latitude": 8.9589, "longitude": 125.5349},
+  {"stop_id": "S2", "name": "Cabadbaran City Terminal", "latitude": 9.1236, "longitude": 125.5339},
+  {"stop_id": "S3", "name": "Nasipit Terminal", "latitude": 8.9792, "longitude": 125.3361},
+  {"stop_id": "S4", "name": "Bayugan City Terminal", "latitude": 8.7142, "longitude": 125.7458}
+]

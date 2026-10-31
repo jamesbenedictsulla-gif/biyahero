@@ -1,0 +1,6 @@
+[
+  {"bus_id": "B1", "name": "Bachelor Express", "route": "Butuan - Cabadbaran", "latitude": 9.0300, "longitude": 125.5400, "capacity": 40, "booked": 12},
+  {"bus_id": "B2", "name": "Agusan Liner", "route": "Butuan - Nasipit", "latitude": 8.9700, "longitude": 125.4300, "capacity": 30, "booked": 30},
+  {"bus_id": "B3", "name": "Caraga Trans", "route": "Butuan - Bayugan", "latitude": 8.8200, "longitude": 125.6500, "capacity": 45, "booked": 5},
+  {"bus_id": "B4", "name": "Rising Sun Bus", "route": "Cabadbaran - Butuan", "latitude": 9.1000, "longitude": 125.5350, "capacity": 25, "booked": 0}
+]
