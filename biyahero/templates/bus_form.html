@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ 'Edit bus' if editing else 'Add bus' }}</h1>
+
+{# 'bus' is a Bus object when editing, or the submitted form (dict-like) when adding #}
+{% set v = bus if bus is mapping else {
+  'bus_id': bus.bus_id, 'name': bus.name, 'route': bus.route,
+  'latitude': bus.latitude, 'longitude': bus.longitude, 'capacity': bus.capacity} %}
+
+<div class="card narrow">
+<form method="POST">
+  <label>Bus ID
+    <input name="bus_id" value="{{ v.get('bus_id', '') }}" required
+           {{ 'readonly' if editing }}>
+  </label>
+  <label>Name
+    <input name="name" value="{{ v.get('name', '') }}" required>
+  </label>
+  <label>Route: from
+    <select name="route_from" required>
+      <option value="" disabled {{ 'selected' if not route_from }}>Choose a stop</option>
+      {% for s in stops %}
+      <option value="{{ s.stop_id }}" {{ 'selected' if s.stop_id == route_from }}>{{ s.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Route: to
+    <select name="route_to" required>
+      <option value="" disabled {{ 'selected' if not route_to }}>Choose a stop</option>
+      {% for s in stops %}
+      <option value="{{ s.stop_id }}" {{ 'selected' if s.stop_id == route_to }}>{{ s.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  {% if editing %}
+  <label>Latitude (-90 to 90)
+    <input name="latitude" type="number" step="any" min="-90" max="90"
+           value="{{ v.get('latitude', '') }}" required>
+  </label>
+  <label>Longitude (-180 to 180)
+    <input name="longitude" type="number" step="any" min="-180" max="180"
+           value="{{ v.get('longitude', '') }}" required>
+  </label>
+  {% endif %}
+  <label>Capacity
+    <input name="capacity" type="number" min="1"
+           value="{{ v.get('capacity', '') }}" required>
+  </label>
+  <button class="btn">Save</button>
+  <a class="btn secondary" href="{{ url_for('home') }}">Cancel</a>
+</form>
+</div>
+{% endblock %}

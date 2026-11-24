@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Log in - Biyahero{% endblock %}
+{% block content %}
+<h1>Log in</h1>
+<div class="card narrow">
+  <form method="POST">
+    <label>Username
+      <input name="username" value="{{ form.get('username', '') }}" required autofocus>
+    </label>
+    <label>Password
+      <input type="password" name="password" required>
+    </label>
+    <button class="btn">Log in</button>
+  </form>
+  <p class="muted">No account yet?
+    <a href="{{ url_for('register', next=request.args.get('next', '')) }}">Register here</a>
+  </p>
+</div>
+{% endblock %}

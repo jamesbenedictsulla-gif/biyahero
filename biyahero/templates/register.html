@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Register - Biyahero{% endblock %}
+{% block content %}
+<h1>Create an account</h1>
+<div class="card narrow">
+  <form method="POST">
+    <label>Username
+      <input name="username" value="{{ form.get('username', '') }}"
+             minlength="3" maxlength="30" pattern="[A-Za-z0-9_]+"
+             title="Letters, numbers and underscore only" required autofocus>
+    </label>
+    <label>Password (at least 6 characters)
+      <input type="password" name="password" minlength="6" required>
+    </label>
+    <label>Confirm password
+      <input type="password" name="confirm" minlength="6" required>
+    </label>
+    <button class="btn">Register</button>
+  </form>
+  <p class="muted">Already have an account?
+    <a href="{{ url_for('login', next=request.args.get('next', '')) }}">Log in</a>
+  </p>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ 'Edit stop' if editing else 'Add stop' }}</h1>
+
+{% set v = stop if stop is mapping else {
+  'stop_id': stop.stop_id, 'name': stop.name,
+  'latitude': stop.latitude, 'longitude': stop.longitude} %}
+
+<div class="card narrow">
+<form method="POST">
+  <label>Stop ID
+    <input name="stop_id" value="{{ v.get('stop_id', '') }}" required
+           {{ 'readonly' if editing }}>
+  </label>
+  <label>Name
+    <input name="name" value="{{ v.get('name', '') }}" required>
+  </label>
+  <label>Latitude (-90 to 90)
+    <input name="latitude" type="number" step="any" min="-90" max="90"
+           value="{{ v.get('latitude', '') }}" required>
+  </label>
+  <label>Longitude (-180 to 180)
+    <input name="longitude" type="number" step="any" min="-180" max="180"
+           value="{{ v.get('longitude', '') }}" required>
+  </label>
+  <button class="btn">Save</button>
+  <a class="btn secondary" href="{{ url_for('stops') }}">Cancel</a>
+</form>
+</div>
+{% endblock %}

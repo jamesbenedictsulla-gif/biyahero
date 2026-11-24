@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Book a seat</h1>
+
+<div class="card narrow">
+  <h3>{{ bus.name }} <small>[{{ bus.bus_id }}]</small></h3>
+  <p class="muted">{{ bus.route }}</p>
+  <p class="seats {{ 'full' if bus.seats_left == 0 else '' }}">
+    {{ bus.seats_left }} / {{ bus.capacity }} seats left
+  </p>
+
+  {% if bus.seats_left == 0 %}
+    <span class="tag full">FULL</span>
+  {% else %}
+  <form method="POST">
+    <label>Passenger name
+      <input name="passenger_name" maxlength="60" placeholder="Leave blank for walk-in">
+    </label>
+    <button class="btn">Confirm booking</button>
+    <a class="btn secondary" href="{{ url_for('home') }}">Back</a>
+  </form>
+  {% endif %}
+</div>
+{% endblock %}

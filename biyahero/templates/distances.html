@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="center-title">Bus Distance to Each Stop</h1>
+<p class="muted center-title">Straight-line distance in kilometres. Route length is the distance between the route's two stops.</p>
+
+<table class="center">
+  <thead>
+    <tr>
+      <th>Bus</th><th>Route</th><th>Route length</th><th>Seats left</th>
+      {% for stop in stops %}<th>{{ stop.name }}</th>{% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+  {% for bus, rows in table %}
+    {% set km = route_km.get(bus.bus_id) %}
+    <tr>
+      <td>{{ bus.name }} <small>[{{ bus.bus_id }}]</small></td>
+      <td>{{ bus.route }}</td>
+      <td>{% if km is not none %}<strong>{{ "%.1f"|format(km) }} km</strong>{% else %}-{% endif %}</td>
+      <td>{{ bus.seats_left }}/{{ bus.capacity }}</td>
+      {% for stop, km_to_stop in rows %}
+        <td>{{ "%.1f"|format(km_to_stop) }} km</td>
+      {% endfor %}
+    </tr>
+  {% else %}
+    <tr><td colspan="{{ stops|length + 4 }}">No buses to show.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

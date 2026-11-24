@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="center-title">Current Bookings</h1>
+
+<table class="center">
+  <thead>
+    <tr><th>#</th><th>Bus</th><th>Passenger</th><th>Booked at</th><th></th></tr>
+  </thead>
+  <tbody>
+  {% for b in bookings %}
+    <tr>
+      <td>{{ b.booking_id }}</td>
+      <td>{{ bus_names.get(b.bus_id, b.bus_id) }} <small>[{{ b.bus_id }}]</small></td>
+      <td>{{ b.passenger_name }}</td>
+      <td>{{ b.created_at }}</td>
+      <td>
+        <form method="POST" action="{{ url_for('cancel_booking', booking_id=b.booking_id) }}"
+              onsubmit="return confirm('Cancel this booking?')">
+          <button class="btn danger">Cancel</button>
+        </form>
+      </td>
+    </tr>
+  {% else %}
+    <tr><td colspan="5">No bookings yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
